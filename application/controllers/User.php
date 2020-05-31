@@ -37,7 +37,7 @@ class User extends CI_Controller
 	public function pembayaran()
 	{
 		$data['title'] = 'GANESHA KNOWLEDGE';
-		$data['pembayaran'] = $this->SiswaModel->getSiswaByUserId(3);
+		$data['pembayaran'] = $this->SiswaModel->getSiswaByUserId($this->session->userdata('id'));
 
 		$this->load->view('templates/user/header_user', $data);
 		$this->load->view('user/pembayaran');
