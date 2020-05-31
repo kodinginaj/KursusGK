@@ -9,7 +9,7 @@
         <div class="row mt-5">
           <div class="col-lg-12">
             <div class="progress" style="height: 40px;">
-              <div class="progress-bar bg-success" role="progressbar" style="width: 33.3%;" id="progressBar">
+              <div class="progress-bar bg-success" role="progressbar" style="width: 50%;" id="progressBar">
               <b class="lead" id="progressText">Step 1</b>
               </div>
             </div>
@@ -97,7 +97,7 @@
         <div id="second"> <!-- AWAL SECOND -->
           <div class="row mt-5">
             <div class="col-lg-12 mb-4 text-center">
-              <h2>Upload Berkas</h2>
+              <h2>Upload Berkas & Pembayaran</h2>
             </div>
             <div class="col-lg-12">
               <div class="form-group">
@@ -105,32 +105,33 @@
                 <input type="file" name="" class="form-control" placeholder="Upload Berkas" id="upload_berkas">
               </div>
 
+              <label>Pembayaran:</label><br>
+              <button class="btn btn-outline-primary" type="button" id="btnBayar">Bayar Sekarang!</button>
+              <button class="btn btn-outline-primary" type="button" id="btnNanti">Bayar Nanti</button>
+              <div id="pay" class="mt-2">
+                <div class="card">
+                  <div class="card-body">
+                    <img src="<?= base_url('assets/img/bca.png'); ?>" style="width: 130px;">
+                    <p>BCA</p>
+                    <p>238904832 an/ PT.Ganesha</p>
+                    <p>Segera Transfer Uang Sebesar <b>Rp. 2.000.000</b></p>
+                  </div>
+                </div>
+                <div class="form-group mt-2">
+                  <label for="upload_pembayaran">Upload Bukti Pembayaran :</label>
+                  <input type="file" name="" class="form-control" placeholder="Upload Berkas" id="upload_pembayaran">
+                </div>
+              </div>
+
               <div class="col-lg-12 text-center">
                 <button class="btn btn-danger" id="prev-2" type="button">Kembali</button>
-                <button class="btn btn-primary" id="next-2" type="button">Lanjut</button>
+                <button class="btn btn-primary" id="submit" type="submit" disabled="">Submit</button>
               </div>
             </div>
           </div>
         </div> <!-- AKHIR SECOND -->
 
-        <div id="third"> <!-- AWAL THIRD -->
-          <div class="row mt-5">
-            <div class="col-lg-12 mb-4 text-center">
-              <h2>Pembayaran</h2>
-            </div>
-            <div class="col-lg-12">
-              <div class="form-group">
-                <label for="upload_pembayaran">Upload Bukti Pembayaran :</label>
-                <input type="file" name="" class="form-control" placeholder="Upload Berkas" id="upload_pembayaran">
-              </div>
 
-              <div class="col-lg-12 text-center">
-                <button class="btn btn-danger" id="prev-3" type="button">Kembali</button>
-                <button class="btn btn-primary" id="submit" type="submit" disabled="">Submit</button>
-              </div>
-            </div>
-          </div>
-        </div> <!-- AKHIR THIRD -->
         </form>
 
 
