@@ -1,8 +1,8 @@
 
-  <div class="jumbotron jumbotron-fluid p-0" style="background-color: #fff;">
+<div class="jumbotron jumbotron-fluid p-0" style="background-color: #fff;">
     <div class="container">
       <img src="<?= base_url('assets/img/jumbotron.png'); ?>" class="w-100">
-  </div>
+    </div>
 </div>
 
 <div class="container">
