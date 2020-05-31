@@ -9,10 +9,15 @@
       <div class="col-lg-8">
         <h5>Nama User</h5>
         <br>
-        <p class="txt-primary">youremail@example.com</p>
+        <p class="txt-primary"><?= $this->session->userdata('email') ?></p>
         <br>
         <p class="m-0">Jadi anggota sejak:</p>
-        <p>5 mei 2020</p>
+        <?php 
+        $timeStamp = $this->session->userdata('bergabung');
+        $timeStamp = date( "d M yy", strtotime($timeStamp)); 
+        
+        ?>
+        <p><?= $timeStamp ?></p>
         <div class="row">
           <div class="col-lg-12">
             <a href="<?= base_url('user/ubahprofil'); ?>"><button class="btn btn-primary">Ubah Profil</button></a>

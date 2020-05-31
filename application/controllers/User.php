@@ -84,6 +84,7 @@ class User extends CI_Controller
 						'id' => $user['id'],
 						'email' => $user['email'],
 						'nama' => $user['nama'],
+						'bergabung' => $user['created_at'],
 						'role' => 'user'
 					];
 					$this->session->set_userdata($data);

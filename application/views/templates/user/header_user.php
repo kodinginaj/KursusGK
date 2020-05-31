@@ -29,49 +29,52 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  	<div class="container">
-  <a class="navbar-brand" href="<?= base_url(); ?>">GANESHA KNOWLEDGE</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-  	<div class="container">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="<?= base_url(); ?>">Beranda <span class="sr-only">(current)</span></a>
-      </li>
-      <!-- SEBELUM LOGIN -->
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#modalDaftar">Daftar</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLogin">Login</a>
-      </li>
-      <!-- AKHIR SEBELUM LOGIN -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="<?= base_url(); ?>">GANESHA KNOWLEDGE</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="container">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="<?= base_url(); ?>">Beranda <span class="sr-only">(current)</span></a>
+          </li>
+         
 
-      <?php
-      if($this->session->userdata('role')=="user"): ?>
-      <!-- SETELAH LOGIN -->
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('user/daftarbimbel'); ?>">Daftar Bimbel</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('user/profilsaya'); ?>">Profil Saya</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLogout">Logout</a>
-      </li>
-      <!-- AKHIR SETELAH LOGIN -->
-      <?php endif; ?>
+          <?php
+          if($this->session->userdata('role')=="user"): ?>
+          <!-- SETELAH LOGIN -->
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('user/daftarbimbel'); ?>">Daftar Bimbel</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('user/profilsaya'); ?>">Profil Saya</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLogout">Logout</a>
+          </li>
+          <!-- AKHIR SETELAH LOGIN -->
+          <?php else: ?>
+          <!-- SEBELUM LOGIN -->
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalDaftar">Daftar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLogin">Login</a>
+          </li>
+          <!-- AKHIR SEBELUM LOGIN -->
+          <?php endif; ?>
 
-      <li class="nav-item">
-        <a class="nav-link" href="#">Selamat Datang PENGUNJUNG</a>
-      </li>
-      
-    </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Selamat Datang PENGUNJUNG</a>
+          </li>
+          
+        </ul>
+      </div>
+      </div>
   </div>
-</div>
 </nav>	
 
 <!-- MODAL DAFTAR -->
@@ -101,16 +104,7 @@
         <div class="form-group">
           <input type="password" name="password" class="form-control" placeholder="Password">
           <?= form_error('password','<small class="text-danger">','</small>'); ?>
-
         </div>
-      </div>
-  </nav>
-
-  <!-- MODAL DAFTAR -->
-  <div class="modal fade" id="modalDaftar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-
 
         <div class="form-group">
           <input type="password" name="kpassword" class="form-control" placeholder="Ulangi Password">
