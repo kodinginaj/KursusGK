@@ -20,23 +20,21 @@
                 </tr>
               </thead>
               <tbody>
+                <?php foreach ($pembayaran as $i => $row) : 
+                  $tanggal = $row['created_at'];
+                  $tanggal = date( "d M yy", strtotime($tanggal));
+                  
+                  ?>
+                
                 <tr>
-                  <td>1</td>
-                  <td>Biaya Semester 1</td>
-                  <td></td>
-                  <td>2019-06-01</td>
-                  <td></td>
+                  <td><?= $i+1 ?></td>
+                  <td><?= $row['kelas']['nama'] ?></td>
+                  <td>Rp. <?= $row['total_pembayaran'] ?></td>
+                  <td><?= $tanggal ?></td>
+                  <td>Rp. <?= $row['total_pembayaran'] ?></td>
                   <td class="text-center"><button class="btn btn-sm btn-outline-secondary">Bayar</button></td>
                 </tr>
-
-                <tr>
-                  <td>1</td>
-                  <td>Biaya Semester 1</td>
-                  <td></td>
-                  <td>2019-06-01</td>
-                  <td></td>
-                  <td class="text-center"><button class="btn btn-sm btn-outline-secondary">Bayar</button></td>
-                </tr>
+                <?php endforeach ; ?>
               </tbody>
 
 
