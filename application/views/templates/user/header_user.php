@@ -45,6 +45,8 @@
       </li>
       <!-- AKHIR SEBELUM LOGIN -->
 
+      <?php
+      if($this->session->userdata('role')=="user"): ?>
       <!-- SETELAH LOGIN -->
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('user/daftarbimbel'); ?>">Daftar Bimbel</a>
@@ -53,9 +55,10 @@
         <a class="nav-link" href="<?= base_url('user/profilsaya'); ?>">Profil Saya</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLogout">Logout</a>
       </li>
       <!-- AKHIR SETELAH LOGIN -->
+      <?php endif; ?>
 
       <li class="nav-item">
         <a class="nav-link" href="#">Selamat Datang PENGUNJUNG</a>
@@ -74,30 +77,37 @@
       <div class="modal-body">
         <h4 class="txt-primary text-center">Daftar</h4>
         <hr class="garisbawah">
+        <form action="<?= base_url('User/registrasi') ?>" method="POST">
         <div class="form-group mt-4">
-          <input type="text" name="" class="form-control" placeholder="Nama Lengkap">
+          <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" value="<?= set_value('nama'); ?>">
+          <?= form_error('nama','<small class="text-danger">','</small>'); ?>
         </div>
 
         <div class="form-group">
-          <input type="text" name="" class="form-control" placeholder="Alamat Tinggal">
+          <input type="text" name="alamat" class="form-control" placeholder="Alamat Tinggal" value="<?= set_value('alamat'); ?>">
+          <?= form_error('alamat','<small class="text-danger">','</small>'); ?>
         </div>
 
         <div class="form-group">
-          <input type="text" name="" class="form-control" placeholder="Alamat Email">
+          <input type="text" name="email" class="form-control" placeholder="Alamat Email" value="<?= set_value('email'); ?>">
+          <?= form_error('email','<small class="text-danger">','</small>'); ?>
         </div>
 
         <div class="form-group">
-          <input type="password" name="" class="form-control" placeholder="Password">
+          <input type="password" name="password" class="form-control" placeholder="Password">
+          <?= form_error('password','<small class="text-danger">','</small>'); ?>
         </div>
 
         <div class="form-group">
-          <input type="password" name="" class="form-control" placeholder="Ulangi Password">
+          <input type="password" name="kpassword" class="form-control" placeholder="Ulangi Password">
+          <?= form_error('kpassword','<small class="text-danger">','</small>'); ?>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-        <button type="button" class="btn btn-primary">Simpan</button>
+        <button type="submit" class="btn btn-primary">Registrasi</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -107,23 +117,47 @@
 <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      
+    <form action="<?= base_url('User/login') ?>" method="POST">
       <div class="modal-body">
         <h4 class="txt-primary text-center">Login</h4>
         <hr class="garisbawah">
         <div class="form-group mt-4">
-          <input type="text" name="" class="form-control" placeholder="Email">
+          <input type="text" name="email" class="form-control" placeholder="Email" value="<?= set_value('email'); ?>">
+          <?= form_error('email','<small class="text-danger">','</small>'); ?>
         </div>
 
         <div class="form-group">
-          <input type="password" name="" class="form-control" placeholder="Password">
+          <input type="password" name="password" class="form-control" placeholder="Password">
+          <?= form_error('password','<small class="text-danger">','</small>'); ?>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-        <button type="button" class="btn btn-primary">Simpan</button>
+        <button type="submit" class="btn btn-primary">Login</button>
       </div>
     </div>
+    </form>
   </div>
 </div>
 <!-- AKHIR MODAL LOGIN -->
+
+<!-- MODAL LOGOUT -->
+<div class="modal fade" id="modalLogout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <form action="<?= base_url('User/logout') ?>" method="POST">
+      <div class="modal-body">
+        <h4 class="txt-primary text-center">Logout</h4>
+        <hr class="garisbawah">
+        <p>Apakah anda yakin untuk logout?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        <a href="<?= base_url('User/logout') ?>"><button type="button" class="btn btn-primary">Logout</button></a>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+<!-- AKHIR MODAL LOGOUT -->
+
