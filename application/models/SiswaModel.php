@@ -13,6 +13,16 @@ class SiswaModel extends CI_Model
         }
     }
 
+    function ubahSiswa($data,$id){
+        $this->db->where('id',$id);
+        $this->db->update('siswa', $data);
+        if ($this->db->affected_rows()>0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     function getSiswaByUserId($id){
         $this->db->select("*");
         $this->db->from("siswa");

@@ -9,6 +9,7 @@ class User extends CI_Controller
 		parent::__construct();
 		$this->load->model("KelasModel");
 		$this->load->model("SiswaModel");
+		$this->load->model("UserModel");
     $this->load->model("UserModel");
 	}
 
@@ -124,9 +125,62 @@ class User extends CI_Controller
 	public function ubahprofil()
 	{
 		$data['title'] = 'GANESHA KNOWLEDGE';
+		$data['user'] = $this->UserModel->getUserDetail($this->session->userdata('id'));
 		$this->load->view('templates/user/header_user', $data);
-		$this->load->view('user/ubahprofil');
+		$this->load->view('user/ubahprofil', $data);
 		$this->load->view('templates/user/footer_user');
+	}
+
+
+	public function ubahprofilproses()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+			$this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
+			$this->form_validation->set_rules('tempatlahir', 'Tempat Lahir', 'required|trim');
+			$this->form_validation->set_rules('tanggallahir', 'Tanggal Lahir', 'required|trim');
+			$this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required|trim');
+			$this->form_validation->set_rules('telepon', 'Telepon', 'required|trim');
+			$this->form_validation->set_rules('namaortu', 'Nama Orang Tua', 'required|trim');
+			$this->form_validation->set_rules('asalsekolah', 'Asal Sekolah', 'required|trim');
+			$this->form_validation->set_message('required', '%s harus tidak boleh kosong');
+			if ($this->form_validation->run() == false) {
+				$this->ubahprofil();
+			} else {
+				$data = [
+					'nama' => $this->input->post("nama"),
+					'alamat' => $this->input->post("alamat"),
+					'tempat_lahir' => $this->input->post("tempatlahir"),
+					'tanggal_lahir' => $this->input->post("tanggallahir"),
+					'jenis_kelamin' => $this->input->post("jk"),
+					'no_telp' => $this->input->post("telepon"),
+					'nama_ortu' => $this->input->post("namaortu"),
+					'asal_sekolah' => $this->input->post("asalsekolah"),
+				];
+				$update = $this->UserModel->ubahUser($data,$this->session->userdata('id'));
+				if ($update) {
+					$data = [
+						'nama' => $this->input->post("nama")
+					];
+					$this->session->set_userdata($data);
+					echo "
+					<script>
+						alert('Berhasil mengubah profil');
+						window.location = '".base_url('user/ubahprofil')."';
+					</script>
+					";
+				}else{
+					echo "
+					<script>
+						alert('Tidak ada data yang diubah');
+						window.location = '".base_url('user/ubahprofil')."';
+					</script>
+					";
+				}
+			}
+		}else{
+			return redirect(base_url('user/ubahprofil'));
+		}
 	}
 
 	public function pembayaran()
@@ -137,6 +191,76 @@ class User extends CI_Controller
 		$this->load->view('templates/user/header_user', $data);
 		$this->load->view('user/pembayaran');
 		$this->load->view('templates/user/footer_user');
+	}
+
+	public function pembayaranproses()
+	{
+		$this->form_validation->set_rules('id', 'id', 'required|trim');
+
+		if (empty($_FILES['foto']['name'])) {
+			$this->form_validation->set_rules('foto', 'Foto', 'required|trim');
+			var_dump($_FILES['foto']['name']);
+		}
+
+		$this->form_validation->set_message('required', '%s harus diisi');
+
+		if ($this->form_validation->run() == false) {
+			echo "
+			<script>
+				alert('Bukti pembayaran tidak boleh kosong');
+				window.location = '".base_url('user/pembayaran')."';
+			</script>
+			";
+		} else {
+			$foto = $_FILES['foto']['name'];
+
+			$belah = explode('.', $foto);
+			$ekstensi = strtolower(end($belah));
+
+			// $namaBaru = $this->session->userdata('id');
+			$namaBaru = $this->session->userdata('id');
+			$namaBaru .= $belah[0];
+			$namaBaruDB = $namaBaru . "." . $ekstensi;
+
+			$config['file_name'] = $namaBaruDB;
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']      = '2048';
+			$config['upload_path'] = './assets/img-pembayaran/';
+
+			$this->load->library('upload', $config);
+			if (!$this->upload->do_upload('foto')) {
+				echo "Error";
+				$error = array('error' => $this->upload->display_errors());
+				echo "
+				<script>
+					alert('Gagal mengupload foto, pastikan ukuran tidak lebih dari 2mb');
+			
+				</script>
+				";
+			} else {
+
+				$data = [
+					"pembayaran" => '/assets/img-pembayaran/' . $namaBaruDB
+				];
+				$update = $this->SiswaModel->ubahSiswa($data,$this->input->post("id"));
+				if ($update) {
+					echo "
+					<script>
+						alert('Berhasil melakukan pembayaran');
+						window.location = '".base_url('user/pembayaran')."';
+					</script>
+					";
+				}else{
+					echo "
+					<script>
+						alert('Ada kesalahan');
+						window.location = '".base_url('user/pembayaran')."';
+					</script>
+					";
+				}
+			}
+			
+		}
 	}
 
 	public function daftarbimbel()
@@ -208,7 +332,7 @@ class User extends CI_Controller
 					$ekstensi = strtolower(end($belah));
 
 					// $namaBaru = $this->session->userdata('id');
-					$namaBaru = "3";
+					$namaBaru = $this->session->userdata('id');
 					$namaBaru .= $belah[0];
 					$namaBaruDB = $namaBaru . "." . $ekstensi;
 
