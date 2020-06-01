@@ -55,6 +55,9 @@
           <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLogout">Logout</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Selamat Datang <?= $this->session->userdata('nama') ?></a>
+          </li>
           <!-- AKHIR SETELAH LOGIN -->
           <?php else: ?>
           <!-- SEBELUM LOGIN -->
@@ -64,12 +67,13 @@
           <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLogin">Login</a>
           </li>
-          <!-- AKHIR SEBELUM LOGIN -->
-          <?php endif; ?>
-
           <li class="nav-item">
             <a class="nav-link" href="#">Selamat Datang PENGUNJUNG</a>
           </li>
+          <!-- AKHIR SEBELUM LOGIN -->
+          <?php endif; ?>
+
+          
           
         </ul>
       </div>
