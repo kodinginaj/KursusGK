@@ -52,4 +52,11 @@ class SiswaModel extends CI_Model
         return $data;
     }
 
+    function getAllSiswa(){
+        $this->db->select("*");
+        $this->db->from("siswa");
+        $data = $this->db->get()->result_array();
+        return $data;
+    }
+
 }
