@@ -40,7 +40,7 @@
                  Aktif 
                  <?php endif; ?>
                  </td>
-                 <td><a href="<?= base_url('admin/detailsiswa'); ?>" class="text-danger">Selengkap-nya</a></td>
+                 <td><a href="<?= base_url('admin/detailsiswa/'.$row['id']); ?>" class="text-danger">Selengkap-nya</a></td>
                  <td>
                  <?php if($row['status']==1): ?>
                  <div class="badge badge-success">Lunas</div></td>
