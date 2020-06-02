@@ -5,6 +5,7 @@
       <div class="col-lg-12">
         <h2 class="txt-primary text-center">Data Kelas</h2>
         <hr class="garisbawah">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahKelas"><i class="fas fa-plus"></i> Tambah Kelas</button>
         <div class="row mt-5">
           <div class="col-lg-12">
             <table class="table table-striped w-100" border="3" bordercolor="white">
@@ -38,6 +39,41 @@
             </table>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="tambahKelas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Kelas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="nama_kelas">Nama Kelas</label>
+          <input type="tex" name="" class="form-control" id="nama_kelas">
+        </div>
+
+        <div class="form-group">
+          <label for="harga_kelas">Harga Kelas</label>
+          <input type="tex" name="" class="form-control" id="harga_kelas">
+        </div>
+
+        <div class="form-group">
+          <label for="jumlah_siswa">Jumlah Siswa</label>
+          <input type="tex" name="" class="form-control" id="jumlah_siswa">
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
       </div>
     </div>
   </div>
