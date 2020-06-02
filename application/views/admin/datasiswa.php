@@ -7,7 +7,7 @@
         <hr class="garisbawah">
         <div class="row mt-5">
           <div class="col-lg-12">
-            <table class="table table-striped w-100" border="3" bordercolor="white">
+            <table class="table table-striped w-100 siswa" border="3" bordercolor="white">
               <thead>
                 <tr class="text-center">
                   <th>ID Siswa</th>
@@ -22,16 +22,35 @@
                 </tr>
               </thead>
               <tbody>
+              <?php 
+              // $i = 1;
+              foreach($siswa as $row): 
+                $date = $row['created_at'];
+                $date = date("d M yy", strtotime($date));?>
+              
                 <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
+                 <td><?=$row['id']?></td>
+                 <td><?=$row['nama']?></td>
+                 <td><?=$date?></td>
+                 <td><?=$row['nama_kelas']?></td>
+                 <td>
+                 <?php if($row['status']==0):?>
+                 Tidak Aktif
+                 <?php else: ?>
+                 Aktif 
+                 <?php endif; ?>
+                 </td>
                  <td><a href="<?= base_url('admin/detailsiswa'); ?>" class="text-danger">Selengkap-nya</a></td>
-                 <td><div class="badge badge-success">Lunas</div></td>
-                 
+                 <td>
+                 <?php if($row['status']==1): ?>
+                 <div class="badge badge-success">Lunas</div></td>
+                 <?php else: ?>
+                   <div class="badge badge-warning">Belum Lunas</div></td>               
+                 <?php endif; ?>
                 </tr>
+              <?php 
+              // $i++;
+              endforeach; ?>
 
          
 

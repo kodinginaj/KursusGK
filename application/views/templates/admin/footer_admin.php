@@ -32,7 +32,7 @@
                         <div class="modal-body">Klik tombol logout</div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn" style="background-color:#ff9597; color:#ffffff" href="<?= base_url('auth/logout'); ?>">Logout</a>
+                            <a class="btn" style="background-color:#ff9597; color:#ffffff" href="<?= base_url('user/logout'); ?>">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,15 @@
             <script src="<?= base_url('assets/vendor/sbadmin/datatables/dataTables.bootstrap4.min.js'); ?>"></script>
             
 
-            
+            <script>
+            $(document).ready(function() {
+                $('.siswa').DataTable({
+                    "aaSorting": [[6,'asc']]
+                });
+                $('.kelas').DataTable();
+                $('.keuangan').DataTable();
+            } );
+            </script>
 
 
             <!-- Custom scripts for all pages-->
