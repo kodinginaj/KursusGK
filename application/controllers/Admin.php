@@ -160,9 +160,16 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	public function detailsiswa()
+	public function detailsiswa($id)
 	{
 		$data['title'] = 'GANESHA KNOWLEDGE';
+
+		$this->db->select("siswa.*, kelas.nama AS nama_kelas");
+		$this->db->from("siswa");
+		$this->db->join("kelas","kelas.id = siswa.kelas_id");
+		$this->db->where("siswa.id",$id);
+		$data['siswa'] = $this->db->get()->row_array();
+
 
 		if($this->session->userdata("role")=="admin"){
 		$this->load->view('templates/admin/header_admin', $data);

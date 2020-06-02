@@ -11,16 +11,16 @@
               <div class="row">
                 <div class="col-lg-6">
                   <pre>
-                  Nama          : Dicky 
-                  Tempat Lahir  : Tasikmalaya   
-                  Tanggal Lahir : 02-09-1998
+                  Nama          : <?= $siswa['nama'] ?> 
+                  Tempat Lahir  : <?= $siswa['tempat_lahir'] ?>    
+                  Tanggal Lahir : <?= $siswa['tanggal_lahir'] ?> 
                   </pre>
                 </div>
                 <div class="col-lg-6">
                   <pre>
-                  Alamat         : Jl. hsgdsfd
-                  Jenis Kelamin  : Laki-Laki 
-                  No Telepon     : 8509987
+                  Alamat         : <?= $siswa['alamat'] ?> 
+                  Jenis Kelamin  : <?= $siswa['jenis_kelamin'] ?> 
+                  No Telepon     : <?= $siswa['no_telp'] ?> 
                   </pre>
                 </div>
               </div>
@@ -33,14 +33,14 @@
             <div class="row">
                 <div class="col-lg-6">
                   <pre>
-                  Kelas     : XII - IPA
-                  Semester  : 2   
+                  Kelas     : <?= $siswa['nama_kelas'] ?> 
+                  Semester  : 1   
                
                   </pre>
                 </div>
                 <div class="col-lg-6">
                   <pre>
-                  Asal Sekolah  : SMA Bbjhdj
+                  Asal Sekolah  : <?= $siswa['asal_sekolah'] ?> 
                   </pre>
                 </div>
               </div>
