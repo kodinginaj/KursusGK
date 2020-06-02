@@ -7,7 +7,7 @@
         <hr class="garisbawah">
         <div class="row mt-5">
           <div class="col-lg-12">
-            <table class="table table-striped w-100" border="3" bordercolor="white">
+            <table class="table table-striped w-100 keuangan" border="3" bordercolor="white">
               <thead>
                 <tr class="text-center">
                   <th style="width: 5%">No</th>

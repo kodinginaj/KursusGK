@@ -13,6 +13,17 @@ class SiswaModel extends CI_Model
         }
     }
 
+    public function getAllSiswa()
+    {
+        $this->db->select("siswa.*, kelas.nama AS nama_kelas");
+        $this->db->from("siswa");
+        $this->db->join("kelas","kelas.id = siswa.kelas_id");
+        // $this->db->order_by("siswa.nama","DESC");
+        $data = $this->db->get()->result_array();
+        
+        return $data;
+    }
+
     function ubahSiswa($data,$id){
         $this->db->where('id',$id);
         $this->db->update('siswa', $data);

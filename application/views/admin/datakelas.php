@@ -8,7 +8,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahKelas"><i class="fas fa-plus"></i> Tambah Kelas</button>
         <div class="row mt-5">
           <div class="col-lg-12">
-            <table class="table table-striped w-100" border="3" bordercolor="white">
+            <table class="table table-striped w-100 kelas" border="3" bordercolor="white">
               <thead>
                 <tr class="text-center">
                   <th>No</th>

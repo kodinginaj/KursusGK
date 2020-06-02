@@ -61,6 +61,7 @@ class User extends CI_Controller
 		}
 	}
 
+
 	public function login(){
 		
 		$email = $this->input->post('email');
@@ -80,16 +81,28 @@ class User extends CI_Controller
 
 			if ($user) {
 				if (password_verify($password, $user['password'])) {
-					$data = [
-						'id' => $user['id'],
-						'email' => $user['email'],
-						'nama' => $user['nama'],
-						'bergabung' => $user['created_at'],
-						'role' => 'user'
-					];
-					$this->session->set_userdata($data);
 					// $this->session->set_flashdata('message', 'Login berhasil!');
+					if($user['role']==1){
+						$data = [
+							'id' => $user['id'],
+							'email' => $user['email'],
+							'nama' => $user['nama'],
+							'bergabung' => $user['created_at'],
+							'role' => 'admin'
+						];
+						$this->session->set_userdata($data);
+						redirect(base_url('admin'));
+					}else{
+						$data = [
+							'id' => $user['id'],
+							'email' => $user['email'],
+							'nama' => $user['nama'],
+							'bergabung' => $user['created_at'],
+							'role' => 'user'
+						];
+						$this->session->set_userdata($data);
 					$this->index();
+					}
 				}else{
 					$this->session->set_flashdata('message', 'Password Salah!');
 					$this->index();
@@ -110,24 +123,38 @@ class User extends CI_Controller
         $this->session->unset_userdata('role');
 
 		$this->session->set_flashdata('message', 'Anda berhasil logout!');
-		$this->index();
+		redirect(base_url());
 	}
 
 	public function profilsaya()
 	{
 		$data['title'] = 'GANESHA KNOWLEDGE';
+
+		if($this->session->userdata("role")=="user"){
 		$this->load->view('templates/user/header_user', $data);
 		$this->load->view('user/profilsaya');
 		$this->load->view('templates/user/footer_user');
+		}else if($this->session->userdata("role")=="admin"){
+			redirect("admin");
+		}else{
+			$this->index();
+		}
 	}
 
 	public function ubahprofil()
 	{
 		$data['title'] = 'GANESHA KNOWLEDGE';
 		$data['user'] = $this->UserModel->getUserDetail($this->session->userdata('id'));
+
+		if($this->session->userdata("role")=="user"){
 		$this->load->view('templates/user/header_user', $data);
 		$this->load->view('user/ubahprofil', $data);
 		$this->load->view('templates/user/footer_user');
+		}else if($this->session->userdata("role")=="admin"){
+			redirect("admin");
+		}else{
+			$this->index();
+		}
 	}
 
 
@@ -187,9 +214,15 @@ class User extends CI_Controller
 		$data['title'] = 'GANESHA KNOWLEDGE';
 		$data['pembayaran'] = $this->SiswaModel->getSiswaByUserId($this->session->userdata('id'));
 
+		if($this->session->userdata("role")=="user"){
 		$this->load->view('templates/user/header_user', $data);
 		$this->load->view('user/pembayaran');
 		$this->load->view('templates/user/footer_user');
+		}else if($this->session->userdata("role")=="admin"){
+			redirect("admin");
+		}else{
+			$this->index();
+		}
 	}
 
 	public function pembayaranproses()
@@ -266,9 +299,16 @@ class User extends CI_Controller
 	{
 		$data['title'] = 'GANESHA KNOWLEDGE';
 		$data['kelas'] = $this->KelasModel->getAllClass();
+
+		if($this->session->userdata("role")=="user"){
 		$this->load->view('templates/user/header_user', $data);
 		$this->load->view('user/daftarbimbel');
 		$this->load->view('templates/user/footer_user');
+		}else if($this->session->userdata("role")=="admin"){
+			redirect("admin");
+		}else{
+			$this->index();
+		}
 	}
 
 	public function daftarbimbelproses()
