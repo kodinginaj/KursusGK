@@ -13,10 +13,12 @@
                   <th>ID Siswa</th>
                   <th>Nama Siswa</th>
                   <th>Tanggal Pendaftaran</th>
-                  <th style="width: 15%">Kelas</th>
-                  <th style="width: 15%">Status</th>
-                  <th style="width: 15%">Rekap Nilai</th>
+                  <th>Kelas</th>
+                  <th>Status</th>
+                  <th>Rekap Nilai</th>
+                  <th>Status Pembayaran</th>
                  
+                  
                 </tr>
               </thead>
               <tbody>
@@ -27,9 +29,12 @@
                  <td></td>
                  <td></td>
                  <td><a href="<?= base_url('admin/detailsiswa'); ?>" class="text-danger">Selengkap-nya</a></td>
-                
+                 <td><div class="badge badge-success">Lunas</div></td>
+                 
                 </tr>
-       
+
+         
+
               </tbody>
 
 
@@ -40,3 +45,5 @@
     </div>
   </div>
 </div>
+
+
