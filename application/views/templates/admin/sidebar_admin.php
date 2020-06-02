@@ -34,13 +34,13 @@
             <?php if($title == 'Data Kelas'): ?>
                 <li class="nav-item active" id="menu-ras">
                 <a class="nav-link pb-0" href="<?= base_url('admin/datakelas'); ?>">
-                    <i class="fas fa-paw"></i>
+                    <i class="fas fa-book"></i>
                     <span>Data Kelas</span></a>
                 </li>
             <?php else: ?>
                 <li class="nav-item" id="menu-ras">
                 <a class="nav-link pb-0" href="<?= base_url('admin/datakelas'); ?>">
-                    <i class="fas fa-paw"></i>
+                    <i class="fas fa-book"></i>
                     <span>Data Kelas</span></a>
                 </li>
 
