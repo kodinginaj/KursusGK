@@ -20,4 +20,23 @@ class KelasModel extends CI_Model
         $data = $kelas->row_array();
         return $data;
     }
+
+    function tambahKelas($data)
+    {
+        $this->db->insert('kelas', $data);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function ubahKelas($data,$id){
+        $this->db->where('id',$id);
+        $this->db->update('kelas', $data);
+        if ($this->db->affected_rows()>0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

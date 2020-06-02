@@ -7,7 +7,7 @@
         <img src="<?= base_url('assets/img/avatar.png'); ?>">
       </div>
       <div class="col-lg-8">
-        <h5>Nama User</h5>
+        <h5><?= $this->session->userdata('nama') ?></h5>
         <br>
         <p class="txt-primary"><?= $this->session->userdata('email') ?></p>
         <br>
