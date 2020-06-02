@@ -2,7 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
-
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model("KelasModel");
+		$this->load->model("SiswaModel");
+		$this->load->model("UserModel");
+	}
 	public function index()
 	{
 		$data['title'] = 'GANESHA KNOWLEDGE';
@@ -26,6 +32,7 @@ class Admin extends CI_Controller {
 	public function datakelas()
 	{
 		$data['title'] = 'Data Kelas';
+		$data['kelas'] = $this->KelasModel->getAllClass();
 		$this->load->view('templates/admin/header_admin', $data);
         $this->load->view('templates/admin/sidebar_admin', $data);
         $this->load->view('templates/admin/topbar_admin', $data);

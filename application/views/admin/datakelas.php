@@ -12,20 +12,25 @@
                 <tr class="text-center">
                   <th>No</th>
                   <th>Nama Kelas</th>
-                  <th>Tanggal Pendaftaran</th>
+                  <th>Tanggal Dibuat</th>
                   <th style="width: 15%">Jumlah Siswa</th>
                
                  
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                <?php foreach ($kelas as $i => $row) : 
+                  $date = $row['created_at'];
+                  $date = date("d M yy", strtotime($date));
+                  ?>
+                  <tr>
+                    <td><?= $i+1 ?></td>
+                    <td><?= $row['nama'] ?></td>
+                    <td><?= $date ?></td>
+                    <td><?= $row['jumlah_siswa'] ?></td>
+                  </tr>
+                <?php endforeach; ?>
                 
-                </tr>
        
               </tbody>
 

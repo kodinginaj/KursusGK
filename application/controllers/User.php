@@ -10,7 +10,6 @@ class User extends CI_Controller
 		$this->load->model("KelasModel");
 		$this->load->model("SiswaModel");
 		$this->load->model("UserModel");
-    $this->load->model("UserModel");
 	}
 
 	public function index()
