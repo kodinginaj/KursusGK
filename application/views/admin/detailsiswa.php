@@ -34,7 +34,7 @@
                 <div class="col-lg-6">
                   <pre>
                   Kelas     : <?= $siswa['nama_kelas'] ?> 
-                  Semester  : 1   
+                  <!-- Semester  : 1    -->
                
                   </pre>
                 </div>

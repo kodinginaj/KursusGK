@@ -23,13 +23,13 @@
               </thead>
               <tbody>
               <?php 
-              // $i = 1;
+              $i = 1;
               foreach($siswa as $row): 
                 $date = $row['created_at'];
                 $date = date("d M yy", strtotime($date));?>
               
                 <tr>
-                 <td><?=$row['id']?></td>
+                 <td><?= $i ?></td>
                  <td><?=$row['nama']?></td>
                  <td><?=$date?></td>
                  <td><?=$row['nama_kelas']?></td>
@@ -49,7 +49,7 @@
                  <?php endif; ?>
                 </tr>
               <?php 
-              // $i++;
+              $i++;
               endforeach; ?>
 
          
