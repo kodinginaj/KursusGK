@@ -105,7 +105,7 @@ class User extends CI_Controller
 					}
 				}else{
 					$this->session->set_flashdata('message', 'Password Salah!');
-					$this->index();
+					redirect(base_url());
 				}
 			}
 			else{ 

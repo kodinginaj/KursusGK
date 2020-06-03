@@ -96,7 +96,7 @@
 
         <div class="row">
           <div class="col-lg-12 text-center">
-            <button class="btn btn-primary">Kembali</button>
+            <a href="<?= base_url('user/profilsaya') ?>"><button class="btn btn-primary">Kembali</button></a>
           </div>
         </div>
       </div>
