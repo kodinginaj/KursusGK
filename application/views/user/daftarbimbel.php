@@ -40,17 +40,25 @@
                   <input type="date" name="tanggallahir" class="form-control" placeholder="Tanggal Lahir" value="<?= set_value('tanggallahir'); ?>" required>
                   <?= form_error('tanggallahir', '<small class="text-danger">', '</small>'); ?>
                 </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadio1" name="jk" class="custom-control-input" value="Laki - Laki" selected>
-                  <label class="custom-control-label" for="customRadio1">Laki - Laki</label>
+
+
+                <div class="form-group">
+                  <label for="">Jenis Kelamin</label>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio1" name="jk" class="custom-control-input" value="Laki - Laki" selected>
+                    <label class="custom-control-label" for="customRadio1">Laki - Laki</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" name="jk" value="Perempuan" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Perempuan</label>
+                  </div>
+                  <?= form_error('jk', '<small class="text-danger">', '</small>'); ?>
                 </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadio2" name="jk"  value="Perempuan" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadio2">Perempuan</label>
-                </div>
-                <?= form_error('jk', '<small class="text-danger">', '</small>'); ?>
+
               </div>
               <div class="col-lg-6">
+
+
                 <div class="form-group">
                   <input type="text" name="telepon" class="form-control" placeholder="No Telepon" value="<?= set_value('telepon'); ?>" required>
                   <?= form_error('telepon', '<small class="text-danger">', '</small>'); ?>
@@ -66,18 +74,31 @@
                   <?= form_error('asalsekolah', '<small class="text-danger">', '</small>'); ?>
                 </div>
 
-                <select id="kelas" class="custom-select my-select" name="kelas">
-                  <option value="" selected>Pilih Kelas</option>
-                  <?php foreach ($kelas as $i => $row) : ?>
-                    <?php if ($row['id'] == set_value('kelas')) : ?>
-                      <option value="<?= $row['id'] ?>" data-harga="<?= $row['harga'] ?>" selected><?= $row['nama'] ?></option>
-                    <?php else : ?>
-                      <option value="<?= $row['id'] ?>" data-harga="<?= $row['harga'] ?>"><?= $row['nama'] ?></option>
-                    <?php endif; ?>
+                <div class="form-group">
+                  <select id="kelas" class="custom-select my-select" name="kelas">
+                    <option value="" selected>Pilih Kelas</option>
+                    <?php foreach ($kelas as $i => $row) : ?>
+                      <?php if ($row['id'] == set_value('kelas')) : ?>
+                        <option value="<?= $row['id'] ?>" data-harga="<?= $row['harga'] ?>" selected><?= $row['nama'] ?></option>
+                      <?php else : ?>
+                        <option value="<?= $row['id'] ?>" data-harga="<?= $row['harga'] ?>"><?= $row['nama'] ?></option>
+                      <?php endif; ?>
 
-                  <?php endforeach; ?>
-                </select>
-                <?= form_error('kelas', '<small class="text-danger">', '</small>'); ?>
+                    <?php endforeach; ?>
+                  </select>
+                  <?= form_error('kelas', '<small class="text-danger">', '</small>'); ?>
+                </div>
+
+
+
+                <div class="form-group">
+                  <label for="fotosiswa">Foto Siswa</label>
+                  <input type="file" id="fotosiswa" name="fotosiswa" class="form-control" required>
+                  <?= form_error('fotosiswa', '<small class="text-danger">', '</small>'); ?>
+                </div>
+
+
+
               </div>
             </div> <!-- AKHIR FIRST -->
             <div class="col-lg-12 text-center">
@@ -125,11 +146,6 @@
 
 
         </form>
-
-
-        <div class="row">
-
-        </div>
       </div>
     </div>
   </div>

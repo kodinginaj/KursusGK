@@ -20,7 +20,8 @@ class User extends CI_Controller
 		$this->load->view('templates/user/footer_user');
 	}
 
-	public function registrasi(){
+	public function registrasi()
+	{
 
 		$enkripsi = PASSWORD_HASH($this->input->post('password'), PASSWORD_BCRYPT);
 
@@ -31,14 +32,14 @@ class User extends CI_Controller
 		$this->form_validation->set_rules('kpassword', 'Konfirmasi Password', 'required|trim|matches[password]');
 
 		$this->form_validation->set_message('required', '%s harus diisi');
-		$this->form_validation->set_message('valid_email', '%s harus sesuai format');	
+		$this->form_validation->set_message('valid_email', '%s harus sesuai format');
 		$this->form_validation->set_message('is_unique', '%s sudah ada');
 		$this->form_validation->set_message('matches', '%s tidak cocok');
 
 		if ($this->form_validation->run() == false) {
 			$this->session->set_flashdata('message', 'Harap periksa kembali form!');
 			$this->index();
-        }else {
+		} else {
 
 			$data = [
 				'nama' => $this->input->post('nama'),
@@ -54,7 +55,7 @@ class User extends CI_Controller
 			if ($hasil) {
 				$this->session->set_flashdata('message', 'Registrasi berhasil!');
 				redirect(base_url());
-			}else{
+			} else {
 				$this->session->set_flashdata('message', 'Registrasi gagal!');
 				$this->index();
 			}
@@ -62,8 +63,9 @@ class User extends CI_Controller
 	}
 
 
-	public function login(){
-		
+	public function login()
+	{
+
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 
@@ -71,18 +73,18 @@ class User extends CI_Controller
 
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'required|trim');
-	
+
 		$this->form_validation->set_message('required', '%s harus diisi');
-		$this->form_validation->set_message('valid_email', '%s harus sesuai format');	
+		$this->form_validation->set_message('valid_email', '%s harus sesuai format');
 
 		if ($this->form_validation->run() == false) {
 			$this->index();
-        }else {
+		} else {
 
 			if ($user) {
 				if (password_verify($password, $user['password'])) {
 					// $this->session->set_flashdata('message', 'Login berhasil!');
-					if($user['role']==1){
+					if ($user['role'] == 1) {
 						$data = [
 							'id' => $user['id'],
 							'email' => $user['email'],
@@ -92,7 +94,7 @@ class User extends CI_Controller
 						];
 						$this->session->set_userdata($data);
 						redirect(base_url('admin'));
-					}else{
+					} else {
 						$data = [
 							'id' => $user['id'],
 							'email' => $user['email'],
@@ -101,26 +103,25 @@ class User extends CI_Controller
 							'role' => 'user'
 						];
 						$this->session->set_userdata($data);
-					$this->index();
+						$this->index();
 					}
-				}else{
+				} else {
 					$this->session->set_flashdata('message', 'Password Salah!');
 					redirect(base_url());
 				}
-			}
-			else{ 
+			} else {
 				$this->session->set_flashdata('message', 'Email tidak terdaftar!');
 				$this->index();
 			}
 		}
-
 	}
 
-	public function logout(){
+	public function logout()
+	{
 		$this->session->unset_userdata('id');
-        $this->session->unset_userdata('email');
-        $this->session->unset_userdata('nama');
-        $this->session->unset_userdata('role');
+		$this->session->unset_userdata('email');
+		$this->session->unset_userdata('nama');
+		$this->session->unset_userdata('role');
 
 		$this->session->set_flashdata('message', 'Anda berhasil logout!');
 		redirect(base_url());
@@ -130,13 +131,13 @@ class User extends CI_Controller
 	{
 		$data['title'] = 'GANESHA KNOWLEDGE';
 
-		if($this->session->userdata("role")=="user"){
-		$this->load->view('templates/user/header_user', $data);
-		$this->load->view('user/profilsaya');
-		$this->load->view('templates/user/footer_user');
-		}else if($this->session->userdata("role")=="admin"){
+		if ($this->session->userdata("role") == "user") {
+			$this->load->view('templates/user/header_user', $data);
+			$this->load->view('user/profilsaya');
+			$this->load->view('templates/user/footer_user');
+		} else if ($this->session->userdata("role") == "admin") {
 			redirect("admin");
-		}else{
+		} else {
 			$this->index();
 		}
 	}
@@ -146,13 +147,13 @@ class User extends CI_Controller
 		$data['title'] = 'GANESHA KNOWLEDGE';
 		$data['user'] = $this->UserModel->getUserDetail($this->session->userdata('id'));
 
-		if($this->session->userdata("role")=="user"){
-		$this->load->view('templates/user/header_user', $data);
-		$this->load->view('user/ubahprofil', $data);
-		$this->load->view('templates/user/footer_user');
-		}else if($this->session->userdata("role")=="admin"){
+		if ($this->session->userdata("role") == "user") {
+			$this->load->view('templates/user/header_user', $data);
+			$this->load->view('user/ubahprofil', $data);
+			$this->load->view('templates/user/footer_user');
+		} else if ($this->session->userdata("role") == "admin") {
 			redirect("admin");
-		}else{
+		} else {
 			$this->index();
 		}
 	}
@@ -183,7 +184,7 @@ class User extends CI_Controller
 					'nama_ortu' => $this->input->post("namaortu"),
 					'asal_sekolah' => $this->input->post("asalsekolah"),
 				];
-				$update = $this->UserModel->ubahUser($data,$this->session->userdata('id'));
+				$update = $this->UserModel->ubahUser($data, $this->session->userdata('id'));
 				if ($update) {
 					$data = [
 						'nama' => $this->input->post("nama")
@@ -192,19 +193,19 @@ class User extends CI_Controller
 					echo "
 					<script>
 						alert('Berhasil mengubah profil');
-						window.location = '".base_url('user/ubahprofil')."';
+						window.location = '" . base_url('user/ubahprofil') . "';
 					</script>
 					";
-				}else{
+				} else {
 					echo "
 					<script>
 						alert('Tidak ada data yang diubah');
-						window.location = '".base_url('user/ubahprofil')."';
+						window.location = '" . base_url('user/ubahprofil') . "';
 					</script>
 					";
 				}
 			}
-		}else{
+		} else {
 			return redirect(base_url('user/ubahprofil'));
 		}
 	}
@@ -214,13 +215,13 @@ class User extends CI_Controller
 		$data['title'] = 'GANESHA KNOWLEDGE';
 		$data['pembayaran'] = $this->SiswaModel->getSiswaByUserId($this->session->userdata('id'));
 
-		if($this->session->userdata("role")=="user"){
-		$this->load->view('templates/user/header_user', $data);
-		$this->load->view('user/pembayaran');
-		$this->load->view('templates/user/footer_user');
-		}else if($this->session->userdata("role")=="admin"){
+		if ($this->session->userdata("role") == "user") {
+			$this->load->view('templates/user/header_user', $data);
+			$this->load->view('user/pembayaran');
+			$this->load->view('templates/user/footer_user');
+		} else if ($this->session->userdata("role") == "admin") {
 			redirect("admin");
-		}else{
+		} else {
 			$this->index();
 		}
 	}
@@ -240,7 +241,7 @@ class User extends CI_Controller
 			echo "
 			<script>
 				alert('Bukti pembayaran tidak boleh kosong');
-				window.location = '".base_url('user/pembayaran')."';
+				window.location = '" . base_url('user/pembayaran') . "';
 			</script>
 			";
 		} else {
@@ -274,24 +275,23 @@ class User extends CI_Controller
 				$data = [
 					"pembayaran" => '/assets/img-pembayaran/' . $namaBaruDB
 				];
-				$update = $this->SiswaModel->ubahSiswa($data,$this->input->post("id"));
+				$update = $this->SiswaModel->ubahSiswa($data, $this->input->post("id"));
 				if ($update) {
 					echo "
 					<script>
 						alert('Berhasil melakukan pembayaran');
-						window.location = '".base_url('user/pembayaran')."';
+						window.location = '" . base_url('user/pembayaran') . "';
 					</script>
 					";
-				}else{
+				} else {
 					echo "
 					<script>
 						alert('Ada kesalahan');
-						window.location = '".base_url('user/pembayaran')."';
+						window.location = '" . base_url('user/pembayaran') . "';
 					</script>
 					";
 				}
 			}
-			
 		}
 	}
 
@@ -300,13 +300,13 @@ class User extends CI_Controller
 		$data['title'] = 'GANESHA KNOWLEDGE';
 		$data['kelas'] = $this->KelasModel->getAllClass();
 
-		if($this->session->userdata("role")=="user"){
-		$this->load->view('templates/user/header_user', $data);
-		$this->load->view('user/daftarbimbel');
-		$this->load->view('templates/user/footer_user');
-		}else if($this->session->userdata("role")=="admin"){
+		if ($this->session->userdata("role") == "user") {
+			$this->load->view('templates/user/header_user', $data);
+			$this->load->view('user/daftarbimbel');
+			$this->load->view('templates/user/footer_user');
+		} else if ($this->session->userdata("role") == "admin") {
 			redirect("admin");
-		}else{
+		} else {
 			$this->index();
 		}
 	}
@@ -324,6 +324,10 @@ class User extends CI_Controller
 			$this->form_validation->set_rules('asalsekolah', 'Asal Sekolah', 'required|trim');
 			$this->form_validation->set_rules('kelas', 'Kelas', 'required|trim');
 
+			if (empty($_FILES['fotosiswa']['name'])) {
+				$this->form_validation->set_rules('fotosiswa', 'Foto siswa', 'required|trim');
+			}
+
 			$this->form_validation->set_message('required', '%s harus tidak boleh kosong');
 			if ($this->form_validation->run() == false) {
 				$this->daftarbimbel();
@@ -332,36 +336,64 @@ class User extends CI_Controller
 
 				if (empty($_FILES['foto']['name'])) {
 					//tanpa pemayaran
-					$data = [
-						"user_id" => $this->session->userdata('id'),
-						"nama" => $this->input->post("nama"),
-						"alamat" => $this->input->post("alamat"),
-						"tempat_lahir" => $this->input->post("tempatlahir"),
-						"tanggal_lahir" => $this->input->post("tanggallahir"),
-						"jenis_kelamin" => $this->input->post("jk"),
-						"no_telp" => $this->input->post("telepon"),
-						"nama_ortu" => $this->input->post("namaortu"),
-						"asal_sekolah" => $this->input->post("asalsekolah"),
-						"kelas_id" => $this->input->post("kelas"),
-						"pembayaran" => "",
-						"total_pembayaran" => $kelas['harga'],
-						"status" => "0",
-					];
-					$insert = $this->SiswaModel->tambahSiswa($data);
-					if ($insert) {
+
+					$fotoSiswa = $_FILES['fotosiswa']['name'];
+
+					$belahSiswa = explode('.', $fotoSiswa);
+					$ekstensiSiswa = strtolower(end($belahSiswa));
+
+					$namaBaruSiswa = $this->session->userdata('id');
+					$namaBaruSiswa .= $belahSiswa[0];
+					$namaBaruDBSiswa = $namaBaruSiswa . "." . $ekstensiSiswa;
+
+					$configSiswa['file_name'] = $namaBaruDBSiswa;
+					$configSiswa['allowed_types'] = 'gif|jpg|png';
+					$configSiswa['max_size']      = '2048';
+					$configSiswa['upload_path'] = './assets/img-siswa/';
+
+					$this->load->library('upload', $configSiswa);
+					if (!$this->upload->do_upload('fotosiswa')) {
+						echo "Error";
+						$error = array('error' => $this->upload->display_errors());
 						echo "
 						<script>
-							alert('Berhasil mendaftar, silahkan lunasi tagihan');
-							window.location = '".base_url('user/pembayaran')."';
+							alert('Gagal mengupload foto siswa, pastikan ukuran tidak lebih dari 2mb');
+							window.location = '" . base_url('user/pembayaran') . "';
 						</script>
 						";
-					}else{
-						echo "
-						<script>
-							alert('Ada kesalahan');
-							window.location = '".base_url('user/daftarbimbel')."';
-						</script>
-						";
+					} else {
+						$data = [
+							"user_id" => $this->session->userdata('id'),
+							"nama" => $this->input->post("nama"),
+							"alamat" => $this->input->post("alamat"),
+							"tempat_lahir" => $this->input->post("tempatlahir"),
+							"tanggal_lahir" => $this->input->post("tanggallahir"),
+							"jenis_kelamin" => $this->input->post("jk"),
+							"no_telp" => $this->input->post("telepon"),
+							"nama_ortu" => $this->input->post("namaortu"),
+							"asal_sekolah" => $this->input->post("asalsekolah"),
+							"kelas_id" => $this->input->post("kelas"),
+							"pembayaran" => "",
+							"total_pembayaran" => $kelas['harga'],
+							"foto" => '/assets/img-siswa/' . $namaBaruDBSiswa,
+							"status" => "0",
+						];
+						$insert = $this->SiswaModel->tambahSiswa($data);
+						if ($insert) {
+							echo "
+							<script>
+								alert('Berhasil mendaftar, silahkan lunasi tagihan');
+								window.location = '" . base_url('user/pembayaran') . "';
+							</script>
+							";
+						} else {
+							echo "
+							<script>
+								alert('Ada kesalahan');
+								window.location = '" . base_url('user/daftarbimbel') . "';
+							</script>
+							";
+						}
 					}
 				} else {
 					//dengan pembayaran
@@ -381,47 +413,75 @@ class User extends CI_Controller
 					$config['upload_path'] = './assets/img-pembayaran/';
 
 					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
 					if (!$this->upload->do_upload('foto')) {
-						echo "Error";
 						$error = array('error' => $this->upload->display_errors());
 						echo "
 						<script>
 							alert('Gagal mengupload foto, pastikan ukuran tidak lebih dari 2mb');
-							window.location = '".base_url('user/pembayaran')."';
+							window.location = '" . base_url('user/pembayaran') . "';
 						</script>
 						";
 					} else {
+						$fotoSiswa = $_FILES['fotosiswa']['name'];
 
-						$data = [
-							"user_id" =>$this->session->userdata('id'),
-							"nama" => $this->input->post("nama"),
-							"alamat" => $this->input->post("alamat"),
-							"tempat_lahir" => $this->input->post("tempatlahir"),
-							"tanggal_lahir" => $this->input->post("tanggallahir"),
-							"jenis_kelamin" => $this->input->post("jk"),
-							"no_telp" => $this->input->post("telepon"),
-							"nama_ortu" => $this->input->post("namaortu"),
-							"asal_sekolah" => $this->input->post("asalsekolah"),
-							"kelas_id" => $this->input->post("kelas"),
-							"pembayaran" => '/assets/img-pembayaran/' . $namaBaruDB,
-							"total_pembayaran" => $kelas['harga'],
-							"status" => "0",
-						];
-						$insert = $this->SiswaModel->tambahSiswa($data);
-						if ($insert) {
+						$belahSiswa = explode('.', $fotoSiswa);
+						$ekstensiSiswa = strtolower(end($belahSiswa));
+
+						$namaBaruSiswa = $this->session->userdata('id');
+						$namaBaruSiswa .= $belahSiswa[0];
+						$namaBaruDBSiswa = $namaBaruSiswa . "." . $ekstensiSiswa;
+
+						$configSiswa['file_name'] = $namaBaruDBSiswa;
+						$configSiswa['allowed_types'] = 'gif|jpg|png';
+						$configSiswa['max_size']      = '2048';
+						$configSiswa['upload_path'] = './assets/img-siswa/';
+
+						$this->load->library('upload', $configSiswa);
+						$this->upload->initialize($configSiswa);
+						if (!$this->upload->do_upload('fotosiswa')) {
+							echo "Error";
+							$error = array('error' => $this->upload->display_errors());
 							echo "
+							<script>
+								alert('Gagal mengupload foto siswa, pastikan ukuran tidak lebih dari 2mb');
+								window.location = '" . base_url('user/pembayaran') . "';
+							</script>
+							";
+						} else {
+
+							$data = [
+								"user_id" => $this->session->userdata('id'),
+								"nama" => $this->input->post("nama"),
+								"alamat" => $this->input->post("alamat"),
+								"tempat_lahir" => $this->input->post("tempatlahir"),
+								"tanggal_lahir" => $this->input->post("tanggallahir"),
+								"jenis_kelamin" => $this->input->post("jk"),
+								"no_telp" => $this->input->post("telepon"),
+								"nama_ortu" => $this->input->post("namaortu"),
+								"asal_sekolah" => $this->input->post("asalsekolah"),
+								"kelas_id" => $this->input->post("kelas"),
+								"pembayaran" => '/assets/img-pembayaran/' . $namaBaruDB,
+								"total_pembayaran" => $kelas['harga'],
+								"foto" => '/assets/img-siswa/' . $namaBaruDBSiswa,
+								"status" => "0",
+							];
+							$insert = $this->SiswaModel->tambahSiswa($data);
+							if ($insert) {
+								echo "
 							<script>
 								alert('Berhasil mendaftar, silahkan lunasi tagihan');
-								window.location = '".base_url('user/pembayaran')."';
+								window.location = '" . base_url('user/pembayaran') . "';
 							</script>
 							";
-						}else{
-							echo "
+							} else {
+								echo "
 							<script>
 								alert('Ada kesalahan');
-								window.location = '".base_url('user/daftarbimbel')."';
+								window.location = '" . base_url('user/daftarbimbel') . "';
 							</script>
 							";
+							}
 						}
 					}
 				}
